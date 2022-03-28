@@ -4,8 +4,7 @@ const { MongoClient } = require('mongodb');
 const connectionMock = require('../utils/connectionMock');
 const dbName = process.env.DBNAME;
 const sinon = require('sinon');
-const moment = require('moment');
-const { faker } = require('@faker-js/faker');
+const { generateNEmployees } = require('../utils')
 
 chai.use(chaiHttp);
 
@@ -14,55 +13,10 @@ const { it } = require("mocha");
 
 const { expect } = chai;
 
-// name: Joi.string().min(3).required(),
-//   department: Joi.string().min(3).required(),
-//   email: Joi.string().email().required(),
-//   salary: Joi.string().min(6).required(),
-//   password: Joi.string().min(6).required(),
-//   birth_date: Joi.string().required(),
-
-const employeeFactory = () => {
-  let randomName = '';
-  const minNameLength = 6;
-  while (randomName.length < minNameLength) {
-    randomName = faker.name.findName();
-  }
-
-  const email = faker.internet.email();
-
-  const passwordLength = 6;
-  const password = faker.random.alphaNumeric(passwordLength);
-
-  let department;
-  department = faker.commerce.department();
-  while (department.length < 3) {
-    department = faker.commerce.department();
-  }
-
-  const salary = String(faker.datatype.number({ min: 10000 }) + '.00');
-
-  const date = faker.date.past(100).toISOString();
-
-  const birth_date = moment(date).format('DD-MM-YYYY');
-
-  const fakeEmployee = { name: randomName, email, password, department, salary, birth_date };
-
-  return fakeEmployee;
-
-};
-
 describe.only('GET /employees', () => {
   let connection;
   let response;
   let db;
-
-  const generateNEmployees = (numberOfEmployees) => {
-    arrayOfEmployees = [];
-    for (let index = 0; index < numberOfEmployees; index++) {
-      arrayOfEmployees.push(employeeFactory());
-    }
-    return arrayOfEmployees;
-  }
 
   const randomNumberOfEmployeesMaxEleven = Math.ceil(Math.random() * 10);
   const employees = generateNEmployees(randomNumberOfEmployeesMaxEleven);
