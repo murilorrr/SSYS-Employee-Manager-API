@@ -1,5 +1,5 @@
-const { StatusCodes } = require('http-status-codes');
-const { getAll } = require('../../services/employees');
+const { StatusCodes } = require("http-status-codes");
+const { getAll } = require("../../services/employees");
 
 module.exports = async (req, res, next) => {
   try {

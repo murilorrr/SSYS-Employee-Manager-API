@@ -1,7 +1,7 @@
-const Joi = require('joi');
-const { StatusCodes } = require('http-status-codes');
-const { customError } = require('../../../utils');
-const Employee = require('../../model')('Employee');
+const Joi = require("joi");
+const { StatusCodes } = require("http-status-codes");
+const { customError } = require("../../../utils");
+const Employee = require("../../model")("Employee");
 
 const employeeSchema = Joi.object({
   name: Joi.string().min(3).required(),
@@ -23,11 +23,12 @@ module.exports = async (employee) => {
 
   const { email } = employee;
   const exists = await alreadyExists(email);
-  if (exists) throw customError(StatusCodes.CONFLICT, 'Employee already registered');
+  if (exists)
+    throw customError(StatusCodes.CONFLICT, "Employee already registered");
 
   await Employee.createOne(employee);
 
-  const { _id, password, ...employeeWithOutPassword } = employee;
+  const { _id: id, password, ...employeeWithOutPassword } = employee;
 
-  return { employee: employeeWithOutPassword };
+  return { employee: { ...employeeWithOutPassword, id } };
 };

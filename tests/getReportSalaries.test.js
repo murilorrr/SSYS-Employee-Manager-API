@@ -10,10 +10,11 @@ chai.use(chaiHttp);
 
 const server = require("../src/server/app");
 const { it } = require("mocha");
+const { report } = require("../src/server/app");
 
 const { expect } = chai;
 
-describe.only("GET /employees", () => {
+describe.only("GET /reports/employees/salary/", () => {
   let connection;
   let response;
   let db;
@@ -40,22 +41,33 @@ describe.only("GET /employees", () => {
       )
     );
 
-    response = await chai.request(server).get("/employees");
+    const buildReport = (employees) => {
+      report = {};
+      const minSalary = 0;
+      const maxSalary = 0;
+      employees.forEach((employee) => {
+        if (employee.salary < minSalary) {
+          minSalary = employee.salary;
+          report.lowest = employee;
+        }
+        if (employee.salary > maxSalary) {
+          maxSalary = employee.salary;
+          report.highest = employee;
+        }
+      });
+    };
 
-    response.body.forEach((employee) => {
-      expect(employee).have.property("id");
-    });
+    buildReport(employees);
 
-    employees.forEach((employee) => {
+    response = await chai.request(server).get("/reports/employees/salary/");
+
+    report.forEach((employee) => {
       delete employee.password;
-    });
-    response.body.forEach((employee) => {
-      delete employee.id;
     });
 
     console.log("employees:");
     console.table(employees);
 
-    expect(response.body).to.be.deep.equal(employees);
+    expect(response.body).to.be.deep.equal(report);
   });
 });

@@ -1,4 +1,4 @@
-const Employee = require('../../model')('Employee');
+const Employee = require("../../model")("Employee");
 
 module.exports = async () => {
   const employees = await Employee.getAll();
@@ -6,8 +6,8 @@ module.exports = async () => {
   const employeesWithOutPassword = [];
 
   employees.forEach((employee) => {
-    const { _id, password, ...outherKeys } = employee;
-    employeesWithOutPassword.push(outherKeys);
+    const { _id: id, password, ...outherKeys } = employee;
+    employeesWithOutPassword.push({ ...outherKeys, id });
   });
 
   return employeesWithOutPassword;
