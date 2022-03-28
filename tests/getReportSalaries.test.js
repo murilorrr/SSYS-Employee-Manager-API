@@ -1,20 +1,20 @@
-const chai = require("chai");
-const chaiHttp = require("chai-http");
-const { MongoClient } = require("mongodb");
-const connectionMock = require("../utils/connectionMock");
+const chai = require('chai');
+const chaiHttp = require('chai-http');
+const { MongoClient } = require('mongodb');
+const connectionMock = require('../utils/connectionMock');
 const dbName = process.env.DATABASE_NAME;
-const sinon = require("sinon");
-const { generateNEmployees } = require("../utils");
+const sinon = require('sinon');
+const { generateNEmployees } = require('../utils');
 
 chai.use(chaiHttp);
 
-const server = require("../src/server/app");
-const { it } = require("mocha");
-const { report } = require("../src/server/app");
+const server = require('../src/server/app');
+const { it } = require('mocha');
+const { report } = require('../src/server/app');
 
 const { expect } = chai;
 
-describe.only("GET /reports/employees/salary/", () => {
+describe.only('GET /reports/employees/salary/', () => {
   let connection;
   let response;
   let db;
@@ -25,7 +25,7 @@ describe.only("GET /reports/employees/salary/", () => {
   before(async () => {
     connection = await connectionMock();
 
-    sinon.stub(MongoClient, "connect").resolves(connection);
+    sinon.stub(MongoClient, 'connect').resolves(connection);
 
     db = connection.db(dbName);
   });
@@ -35,8 +35,8 @@ describe.only("GET /reports/employees/salary/", () => {
       employees.map((employee) =>
         chai
           .request(server)
-          .post("/employees")
-          .set("content-type", "application/json")
+          .post('/employees')
+          .set('content-type', 'application/json')
           .send(employee)
       )
     );
@@ -59,13 +59,13 @@ describe.only("GET /reports/employees/salary/", () => {
 
     buildReport(employees);
 
-    response = await chai.request(server).get("/reports/employees/salary/");
+    response = await chai.request(server).get('/reports/employees/salary/');
 
     report.forEach((employee) => {
       delete employee.password;
     });
 
-    console.log("employees:");
+    console.log('employees:');
     console.table(employees);
 
     expect(response.body).to.be.deep.equal(report);

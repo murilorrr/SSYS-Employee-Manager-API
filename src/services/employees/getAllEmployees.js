@@ -1,4 +1,4 @@
-const Employee = require("../../model")("Employee");
+const Employee = require('../../model')('Employee');
 
 module.exports = async () => {
   const employees = await Employee.getAll();
