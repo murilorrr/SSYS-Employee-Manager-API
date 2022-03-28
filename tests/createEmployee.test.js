@@ -21,7 +21,7 @@ const employee = {
   "birth_date": "01-01-1983"
 };
 
-describe.only('POST /employee', () => {
+describe('POST /employees', () => {
   let connection;
   let response;
   let db;
