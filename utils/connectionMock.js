@@ -5,7 +5,7 @@ const { MongoMemoryServer } = require('mongodb-memory-server');
 const connection = async () => {
 
   const DBServer = await MongoMemoryServer.create();
-  const URLMock = await DBServer.getUri();
+  const URLMock = DBServer.getUri();
 
   return MongoClient.connect(URLMock, {
     useNewUrlParser: true,
