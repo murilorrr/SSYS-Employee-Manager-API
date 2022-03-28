@@ -33,7 +33,11 @@ const employeeFactory = () => {
   const passwordLength = 6;
   const password = faker.random.alphaNumeric(passwordLength);
 
-  const departament = faker.commerce.department();
+  let department;
+  department = faker.commerce.department();
+  while (department.length < 3) {
+    department = faker.commerce.department();
+  }
 
   const salary = String(faker.datatype.number({ min: 10000 }) + '.00');
 
@@ -41,19 +45,10 @@ const employeeFactory = () => {
 
   const birth_date = moment(date).format('DD-MM-YYYY');
 
-  const fakeEmployee = { name: randomName, email, password, departament, salary, birth_date };
+  const fakeEmployee = { name: randomName, email, password, department, salary, birth_date };
 
   return fakeEmployee;
 
-};
-
-const createEmployeesInDataBase = (employees) => {
-  employees.forEach(async(employee) => {
-    await chai.request(server)
-        .post('/employees')
-        .set('content-type', 'application/json')
-        .send(employee)
-  });
 };
 
 describe.only('GET /employees', () => {
@@ -83,16 +78,23 @@ describe.only('GET /employees', () => {
 
   it('Quando são requisitados todos os trabalhadores"employees"', async () => {
 
-    createEmployeesInDataBase(employees);
+    await Promise.all(employees.map((employee) =>
+      chai.request(server)
+          .post('/employees')
+          .set('content-type', 'application/json')
+          .send(employee)
+    ));
 
     response = await chai.request(server)
-        .get('/employees')
+        .get('/employees');
 
         employees.forEach((employee) => {
           delete employee.password;
         });
-    console.table(employees);
-    expect(response.body.employees).to.be.deep.equal(employees);
 
+    console.log("employees:")
+    console.table(employees);
+
+    expect(response.body).to.be.deep.equal(employees);
   });
 });
