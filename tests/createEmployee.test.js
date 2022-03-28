@@ -10,7 +10,7 @@ const server = require("../src/server/app");
 
 const { expect } = chai;
 
-const user = {
+const employee = {
   "name": "Anakin Skywalker",
   "department": "Architecture",
   "email": "skywalker@ssys.com.br",
@@ -41,7 +41,7 @@ describe('POST /employee', () => {
       response = await chai.request(server)
         .post('/employees')
         .set('content-type', 'application/json')
-        .send(user);
+        .send(employee);
 
       expect(response).to.have.status(201);
 

@@ -10,12 +10,12 @@ const server = require("../src/server/app");
 
 const { expect } = chai;
 
-const userLogin = {
+const employeeLogin = {
   "email": "skywalker@ssys.com.br",
   "password": "beStrong"
 };
 
-const user = {
+const employee = {
   "name": "Anakin Skywalker",
   "department": "Architecture",
   "email": "skywalker@ssys.com.br",
@@ -46,12 +46,12 @@ describe('POST /login', () => {
       await chai.request(server)
         .post('/employees')
         .set('content-type', 'application/json')
-        .send(user);
+        .send(employee);
 
       response = await chai.request(server)
         .post('/login')
         .set('content-type', 'application/json')
-        .send(userLogin);
+        .send(employeeLogin);
 
       expect(response).to.have.status(200);
       expect(response.body).to.have.property('token');
