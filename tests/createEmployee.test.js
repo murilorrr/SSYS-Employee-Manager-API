@@ -3,10 +3,12 @@ const chaiHttp = require("chai-http");
 const { MongoClient } = require('mongodb');
 const connectionMock = require('../utils/connectionMock');
 const dbName = process.env.DBNAME;
+const sinon = require('sinon');
 
 chai.use(chaiHttp);
 
 const server = require("../src/server/app");
+const { it } = require("mocha");
 
 const { expect } = chai;
 
@@ -19,7 +21,7 @@ const employee = {
   "birth_date": "01-01-1983"
 };
 
-describe('POST /employee', () => {
+describe.only('POST /employee', () => {
   let connection;
   let response;
   let db;
@@ -37,7 +39,7 @@ describe('POST /employee', () => {
     MongoClient.connect.restore();
   });
 
-  test('Quando é criado com sucesso', async () => {
+  it('Quando é criado com sucesso', async () => {
       response = await chai.request(server)
         .post('/employees')
         .set('content-type', 'application/json')
@@ -48,9 +50,11 @@ describe('POST /employee', () => {
       expect(response.body).to.be.a('object');
 
       expect(response.body).to.have.property('employee');
-      const [keys, _password] = response.bodysObject.keys(user);
-      keys.forEach((key) => {
-          expect(response.body.user[key]).to.be.equal(user[key]);
+      const SUT = response.body.employee;
+      console.log(SUT);
+      const arrayOfKeys = Object.keys(SUT);
+      arrayOfKeys.forEach((key) => {
+        expect(SUT[key]).to.be.equal(employee[key]);
       });
   });
 });
