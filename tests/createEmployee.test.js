@@ -10,11 +10,6 @@ const server = require("../src/server/app");
 
 const { expect } = chai;
 
-const userLogin = {
-  "email": "skywalker@ssys.com.br",
-  "password": "beStrong"
-};
-
 const user = {
   "name": "Anakin Skywalker",
   "department": "Architecture",
@@ -24,7 +19,7 @@ const user = {
   "birth_date": "01-01-1983"
 };
 
-describe('POST /login', () => {
+describe('POST /employee', () => {
   let connection;
   let response;
   let db;
@@ -43,19 +38,19 @@ describe('POST /login', () => {
   });
 
   test('Quando é criado com sucesso', async () => {
-      await chai.request(server)
+      response = await chai.request(server)
         .post('/employees')
         .set('content-type', 'application/json')
         .send(user);
 
-      response = await chai.request(server)
-        .post('/login')
-        .set('content-type', 'application/json')
-        .send(userLogin);
+      expect(response).to.have.status(201);
 
-      expect(response).to.have.status(200);
-      expect(response.body).to.have.property('token');
-      expect(response.body).to.have.property('token').to.be.a('string');
-      expect(response.body).to.have.property('token').have.length.greaterThanOrEqual(1);
+      expect(response.body).to.be.a('object');
+
+      expect(response.body).to.have.property('employee');
+      const [keys, _password] = response.bodysObject.keys(user);
+      keys.forEach((key) => {
+          expect(response.body.user[key]).to.be.equal(user[key]);
+      });
   });
 });
