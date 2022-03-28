@@ -7,9 +7,9 @@ const employeeSchema = Joi.object({
   name: Joi.string().min(3).required(),
   department: Joi.string().min(3).required(),
   email: Joi.string().email().required(),
-  salary: Joi.string().alphanum().required(),
+  salary: Joi.string().min(6).required(),
   password: Joi.string().min(6).required(),
-  birth_date: Joi.string().dataUri().required,
+  birth_date: Joi.string().required(),
 });
 
 const alreadyExists = async (email) => {
@@ -27,5 +27,7 @@ module.exports = async (employee) => {
 
   await Employee.createOne(employee);
 
-  return { employee };
+  const { _id, password, ...employeeWithOutPassword } = employee;
+
+  return { employee: employeeWithOutPassword };
 };
