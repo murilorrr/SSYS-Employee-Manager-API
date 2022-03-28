@@ -23,7 +23,20 @@ const getOneByEmail = async (collection, email) => {
   }
 };
 
+const getAll = async (collection) => {
+  try {
+    const result = await connection()
+      .then((db) => db.collection(collection)
+        .find({})
+        .toArray());
+    return result || [];
+  } catch (error) {
+    return error.message;
+  }
+};
+
 module.exports = (collection) => ({
   createOne: (entity) => createOne(collection, entity),
   getOneByEmail: (email) => getOneByEmail(collection, email),
+  getAll: () => getAll(collection),
 });

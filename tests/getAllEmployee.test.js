@@ -88,6 +88,9 @@ describe.only('GET /employees', () => {
     response = await chai.request(server)
         .get('/employees')
 
+        employees.forEach((employee) => {
+          delete employee.password;
+        });
     console.table(employees);
     expect(response.body.employees).to.be.deep.equal(employees);
 
