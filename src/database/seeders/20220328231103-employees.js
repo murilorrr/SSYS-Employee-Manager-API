@@ -1,26 +1,12 @@
 'use strict';
-
-// "name": "Anakin Skywalker",
-//   "department": "Architecture",
-//   "email": "skywalker@ssys.com.br",
-//   "password": "beStrong",
-//   "salary": "4000.00",
-//   "birth_date": "01-01-1983"
+const { generateNEmployees } = require('../../../utils');
+const employees = generateNEmployees(Math.ceil(Math.random() * 99 ));
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.bulkInsert(
       'Employees',
-      [
-        {
-          name: 'Anakin Skywalker',
-          department: 'Architecture',
-          email: 'skywalker@ssys.com.br',
-          password: 'beStrong',
-          salary: '4000.00',
-          birth_date: '01-01-1983',
-        },
-      ],
+      employees,
       { timestamps: false }
     );
   },
