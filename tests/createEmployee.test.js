@@ -1,11 +1,11 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
-const sinon = require('sinon');
+const { Employee } = require('../src/database/models');
 
 chai.use(chaiHttp);
 
 const server = require('../src/server/app');
-const { it } = require('mocha');
+const { it, before } = require('mocha');
 
 const { expect } = chai;
 
@@ -21,12 +21,12 @@ const employee = {
 describe('POST /employees', () => {
   let response;
 
-  before(async () => {
-
+  before(() => {
+    Employee.destroy({ where: {} });
   });
 
-  after(async () => {
-
+  after(() => {
+    Employee.destroy({ where: {} });
   });
 
   it('Quando é criado com sucesso', async () => {
@@ -42,9 +42,9 @@ describe('POST /employees', () => {
 
     expect(response.body).to.have.property('employee');
     const SUT = response.body.employee;
-    console.log(SUT);
     const arrayOfKeys = Object.keys(SUT);
     arrayOfKeys.forEach((key) => {
+      if (key === 'id') return expect(SUT[key]).to.be.not.equal('')
       expect(SUT[key]).to.be.equal(employee[key]);
     });
   });

@@ -1,6 +1,7 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const { generateNEmployees } = require('../utils');
+const { Employee } = require('../src/database/models');
 
 chai.use(chaiHttp);
 
@@ -9,13 +10,18 @@ const { it } = require('mocha');
 
 const { expect } = chai;
 
-describe.only('GET /employees', () => {
+describe('GET /employees', () => {
   let response;
 
   const randomNumberOfEmployeesMaxEleven = Math.ceil(Math.random() * 10);
   const employees = generateNEmployees(randomNumberOfEmployeesMaxEleven);
 
-  before(async () => {
+  before(() => {
+    Employee.destroy({ where: {} });
+  });
+
+  after(() => {
+    Employee.destroy({ where: {} });
   });
 
   it('Quando são requisitados todos os trabalhadores"employees"', async () => {
@@ -30,11 +36,7 @@ describe.only('GET /employees', () => {
     );
 
     response = await chai.request(server).get('/employees');
-
-    response.body.forEach((employee) => {
-      expect(employee).have.property('id');
-    });
-
+    
     employees.forEach((employee) => {
       delete employee.password;
     });
@@ -42,6 +44,12 @@ describe.only('GET /employees', () => {
     console.log('employees:');
     console.table(employees);
 
-    expect(response.body).to.be.deep.equal(employees);
+    response.body.forEach((employee, index) => {
+      expect(employee).have.property('id');
+      Object.keys(employee).forEach((key) => {
+        if (key === 'id') return expect(employee[key]).to.be.not.equal('')
+        expect(employee[key]).to.be.equal(employees[index][key]);
+      });
+    });
   });
 });
