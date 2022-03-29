@@ -19,6 +19,15 @@ const defaultEmployee = {
   birth_date: '01-01-1983',
 };
 
+const employee = {
+  name: 'Anakin Skywalker',
+  department: 'Architecture',
+  email: 'skywalker@ssys.com.br',
+  password: 'beStrong',
+  salary: '4000.00',
+  birth_date: '01-01-1983',
+};
+
 describe('GET /reports/employees/age/ (age report)', () => {
   let response;
   let token;
@@ -41,7 +50,7 @@ describe('GET /reports/employees/age/ (age report)', () => {
   });
 
   it('Quando são requisitados todos os trabalhadores"employees" em um relatorio de idade', async () => {
-    const loginRequest = await chai.request(server).post('/employees/login').send(defaultEmployee);
+    const loginRequest = await chai.request(server).post('/employees/login').send(employee);
 
     token = loginRequest.body.token;
 
@@ -82,5 +91,29 @@ describe('GET /reports/employees/age/ (age report)', () => {
         expect(response.body[key][employeeKeys]).to.be.equal(report[key][employeeKeys]);
       });
     });
+  });
+
+  it('Será validado que não é possível fazer login de um usuário que não existe', async () => {
+    response = await chai
+      .request(server)
+      .post('/employees/login')
+      .set('content-type', 'application/json')
+      .send({ email: `${employee.email}0000`, password: employee.password });
+
+    expect(response.status).to.be.equal(404);
+    expect(response.body).to.be.deep.equal({ message: 'Invalid fields' });
+  });
+
+  it('Não será possivel fazer o report caso não existam usuários', async () => {
+    const loginRequest = await chai.request(server).post('/employees/login').send(employee);
+
+    token = loginRequest.body.token;
+
+    Employee.destroy({ where: {} });
+
+    response = await chai.request(server).get('/reports/employees/age/').set('authorization', token);
+
+    expect(response.status).to.be.equal(404);
+    expect(response.body).to.be.deep.equal({ message: 'Employees not found' });
   });
 });

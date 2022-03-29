@@ -6,11 +6,20 @@ const { Employee } = require('../src/database/models');
 chai.use(chaiHttp);
 
 const server = require('../src/server/app');
-const { it, test } = require('mocha');
+const { it } = require('mocha');
 
 const { expect } = chai;
 
 const defaultEmployee = {
+  name: 'Anakin Skywalker',
+  department: 'Architecture',
+  email: 'skywalker@ssys.com.br',
+  password: 'beStrong',
+  salary: '4000.00',
+  birth_date: '01-01-1983',
+};
+
+const employee = {
   name: 'Anakin Skywalker',
   department: 'Architecture',
   email: 'skywalker@ssys.com.br',
@@ -58,14 +67,15 @@ describe('GET /reports/employees/salary/ (salary report)', () => {
       return report;
     };
 
+    const loginRequest = await chai.request(server).post('/employees/login').send(employee);
+
+    token = loginRequest.body.token;
+
     const report = buildReport(employees);
     Object.keys(report).forEach((key) => {
       delete report[key].password;
     });
 
-    const loginRequest = await chai.request(server).post('/employees/login').send(defaultEmployee);
-
-    token = loginRequest.body.token;
 
     response = await chai.request(server).get('/reports/employees/salary/').set('authorization', token);
 
@@ -85,14 +95,14 @@ describe('GET /reports/employees/salary/ (salary report)', () => {
       .request(server)
       .post('/employees/login')
       .set('content-type', 'application/json')
-      .send({ email: `${defaultEmployee.email}0000`, password: defaultEmployee.password });
+      .send({ email: `${employee.email}0000`, password: employee.password });
 
     expect(response.status).to.be.equal(404);
     expect(response.body).to.be.deep.equal({ message: 'Invalid fields' });
   });
 
   it('Não será possivel fazer o report caso não existam usuários', async () => {
-    const loginRequest = await chai.request(server).post('/employees/login').send(defaultEmployee);
+    const loginRequest = await chai.request(server).post('/employees/login').send(employee);
 
     token = loginRequest.body.token;
 
