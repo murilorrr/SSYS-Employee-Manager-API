@@ -4,7 +4,7 @@ const { expect } = require('chai');
 
 const errorCustom = {
   code: 404,
-  message: 'NotFound'
+  message: 'NotFound',
 };
 
 describe('Teste de Unidade do Middleware de error', () => {
@@ -29,7 +29,7 @@ describe('Teste de Unidade do Middleware de error', () => {
   beforeEach(() => {
     req = {
       params: {},
-      body: {}
+      body: {},
     };
 
     res = {
@@ -41,7 +41,7 @@ describe('Teste de Unidade do Middleware de error', () => {
       },
       json(payload) {
         this.data = payload;
-      }
+      },
     };
   });
 

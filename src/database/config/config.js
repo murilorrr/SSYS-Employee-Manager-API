@@ -8,19 +8,19 @@ const options = {
   database: process.env.DATABASE_NAME || 'SSYS',
   dialect: 'mysql',
   dialectOptions: {
-    timezone: 'Z'
+    timezone: 'Z',
   },
-  logging: false
+  logging: false,
 };
 
 module.exports = {
   development: {
-    ...options
+    ...options,
   },
   test: {
-    ...options
+    ...options,
   },
   production: {
-    ...options
-  }
+    ...options,
+  },
 };

@@ -16,7 +16,7 @@ const defaultEmployee = {
   email: 'skywalker@ssys.com.br',
   password: 'beStrong',
   salary: '4000.00',
-  birth_date: '01-01-1983'
+  birth_date: '01-01-1983',
 };
 
 describe('GET ById /employees/:id', () => {
@@ -30,12 +30,8 @@ describe('GET ById /employees/:id', () => {
     Employee.destroy({ where: {} });
     await Promise.all(
       employees.map((employee) =>
-        chai
-          .request(server)
-          .post('/employees')
-          .set('content-type', 'application/json')
-          .send(employee)
-      )
+        chai.request(server).post('/employees').set('content-type', 'application/json').send(employee),
+      ),
     );
   });
 
@@ -66,10 +62,7 @@ describe('GET ById /employees/:id', () => {
 
     token = loginRequest.body.token;
 
-    response = await chai
-      .request(server)
-      .get(`/employees/999999999999999`)
-      .set('authorization', token);
+    response = await chai.request(server).get(`/employees/999999999999999`).set('authorization', token);
 
     expect(response.body).to.be.a('object');
     expect(response.body).to.be.deep.equal({ message: 'Employee not found' });
