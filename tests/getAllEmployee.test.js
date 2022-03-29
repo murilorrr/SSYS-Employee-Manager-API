@@ -39,7 +39,6 @@ describe('GET /employees', () => {
 
     console.log('employees:');
     console.table(employees);
-    console.table(response.body);
 
     response.body.forEach((employee) => {
       expect(employee).have.property('id');
