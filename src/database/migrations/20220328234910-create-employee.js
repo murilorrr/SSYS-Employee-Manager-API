@@ -6,7 +6,7 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       name: {
         type: Sequelize.STRING,
@@ -32,10 +32,10 @@ module.exports = {
       birth_date: {
         type: Sequelize.STRING,
         allowNull: false,
-      }
+      },
     });
   },
   down: async (queryInterface, Sequelize) => {
     await queryInterface.dropTable('Employees');
-  }
+  },
 };

@@ -44,7 +44,7 @@ describe('POST /employees', () => {
     const SUT = response.body.employee;
     const arrayOfKeys = Object.keys(SUT);
     arrayOfKeys.forEach((key) => {
-      if (key === 'id') return expect(SUT[key]).to.be.not.equal('')
+      if (key === 'id') return expect(SUT[key]).to.be.not.equal('');
       expect(SUT[key]).to.be.equal(employee[key]);
     });
   });

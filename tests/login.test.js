@@ -25,9 +25,7 @@ const employee = {
 describe('POST /login', () => {
   let response;
 
-  before(async () => {
-
-  });
+  before(async () => {});
 
   it('Quando é criado com sucesso', async () => {
     await chai

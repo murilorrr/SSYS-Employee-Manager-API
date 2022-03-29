@@ -10,15 +10,13 @@ const { report } = require('../src/server/app');
 
 const { expect } = chai;
 
-describe.only('GET /reports/employees/salary/', () => {
+describe('GET /reports/employees/salary/', () => {
   let response;
 
   const randomNumberOfEmployeesMaxEleven = Math.ceil(Math.random() * 10);
   const employees = generateNEmployees(randomNumberOfEmployeesMaxEleven);
 
-  before(async () => {
-
-  });
+  before(async () => {});
 
   it('Quando são requisitados todos os trabalhadores"employees"', async () => {
     await Promise.all(

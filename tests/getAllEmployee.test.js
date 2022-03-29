@@ -36,7 +36,7 @@ describe('GET /employees', () => {
     );
 
     response = await chai.request(server).get('/employees');
-    
+
     employees.forEach((employee) => {
       delete employee.password;
     });
@@ -47,7 +47,7 @@ describe('GET /employees', () => {
     response.body.forEach((employee, index) => {
       expect(employee).have.property('id');
       Object.keys(employee).forEach((key) => {
-        if (key === 'id') return expect(employee[key]).to.be.not.equal('')
+        if (key === 'id') return expect(employee[key]).to.be.not.equal('');
         expect(employee[key]).to.be.equal(employees[index][key]);
       });
     });
