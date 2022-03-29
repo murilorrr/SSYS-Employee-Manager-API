@@ -8,6 +8,7 @@
     "db:start": "npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
     "test": "mocha tests/*$NAME*.{test,spec}.js -timeout 10000 --exit",
     "coverage": "nyc --reporter=text mocha --exit",
+    "prepush": "lint && prettier",
     "lint": "./node_modules/.bin/eslint . --ext .js,.jsx,.ts,.tsx",
     "prettier": "npx prettier --write .",
     "debug": "nodemon ./src/server/server.js"
