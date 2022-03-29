@@ -6,7 +6,7 @@ const { Employee } = require('../src/database/models');
 chai.use(chaiHttp);
 
 const server = require('../src/server/app');
-const { it } = require('mocha');
+const { it, test } = require('mocha');
 
 const { expect } = chai;
 
@@ -78,5 +78,16 @@ describe('GET /reports/employees/salary/ (salary report)', () => {
         expect(response.body[key][employeeKeys]).to.be.equal(report[key][employeeKeys]);
       });
     });
+  });
+
+  it('Será validado que não é possível fazer login de um usuário que não existe', async () => {
+    response = await chai
+      .request(server)
+      .post('/employees/login')
+      .set('content-type', 'application/json')
+      .send({ email: `${defaultEmployee.email}0000`, password: defaultEmployee.password });
+
+    expect(response.status).to.be.equal(404);
+    expect(response.body).to.be.deep.equal({ message: 'Invalid fields' });
   });
 });
