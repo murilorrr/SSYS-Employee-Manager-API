@@ -10,7 +10,7 @@ const { it } = require('mocha');
 
 const { expect } = chai;
 
-describe.only('GET /reports/employees/age/ (age report)', () => {
+describe('GET /reports/employees/age/ (age report)', () => {
   let response;
 
   const randomNumberOfEmployeesMaxEleven = Math.ceil(Math.random() * 10);
@@ -59,7 +59,7 @@ describe.only('GET /reports/employees/age/ (age report)', () => {
     console.table(employees);
     const report = buildReport(employees);
 
-    response = await chai.request(server).get('/reports/employees/salary/');
+    response = await chai.request(server).get('/reports/employees/age/');
 
     expect(response.status).to.be.equal(200);
     expect(response.body).to.not.be.equal({});
