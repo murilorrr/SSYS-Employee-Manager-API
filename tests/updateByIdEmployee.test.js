@@ -27,7 +27,7 @@ const updateEmployee = {
   birth_date: '01-01-1983',
 }
 
-describe.only('PUT ById /employees/:id', () => {
+describe('PUT ById /employees/:id', () => {
   let response;
   let token;
   let id;
