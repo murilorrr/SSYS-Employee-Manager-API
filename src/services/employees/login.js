@@ -1,5 +1,5 @@
 const { StatusCodes } = require('http-status-codes');
-const bcrypt = require("bcrypt");
+const bcrypt = require('bcrypt');
 const Joi = require('joi');
 const { Employee } = require('../../database/models');
 const { generateJWT } = require('../../../utils');
@@ -29,6 +29,7 @@ const validateLogin = async (email, password) => {
   if (error) throw customError(StatusCodes.BAD_REQUEST, error.message);
 
   const userFound = await alreadyExists(email, password);
+
   if (!userFound) {
     throw customError(StatusCodes.NOT_FOUND, 'Invalid fields');
   }

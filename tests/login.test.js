@@ -20,10 +20,10 @@ const employee = {
   email: 'skywalker@ssys.com.br',
   password: 'beStrong',
   salary: '4000.00',
-  birthDate: '01-01-1983',
+  birth_date: '01-01-1983',
 };
 
-describe('POST /login', () => {
+describe('POST /employees/login', () => {
   let response;
 
   before(() => {
@@ -37,7 +37,7 @@ describe('POST /login', () => {
   it('Quando é criado com sucesso', async () => {
     await chai.request(server).post('/employees').set('content-type', 'application/json').send(employee);
 
-    response = await chai.request(server).post('/login').set('content-type', 'application/json').send(employeeLogin);
+    response = await chai.request(server).post('/employees/login').set('content-type', 'application/json').send(employeeLogin);
 
     expect(response).to.have.status(200);
     expect(response.body).to.have.property('token');

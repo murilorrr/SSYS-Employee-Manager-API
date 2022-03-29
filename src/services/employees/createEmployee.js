@@ -1,6 +1,6 @@
 const Joi = require('joi');
 const { StatusCodes } = require('http-status-codes');
-const { customError } = require('../../../utils');
+const { customError, encryptPassword } = require('../../../utils');
 const { Employee } = require('../../database/models');
 
 const employeeSchema = Joi.object({
@@ -18,16 +18,23 @@ const alreadyExists = async (email) => {
 };
 
 module.exports = async (employee) => {
+  const {
+    name, email, password, department, salary, birth_date,
+  } = employee;
   const { error } = employeeSchema.validate(employee);
   if (error) throw customError(StatusCodes.BAD_REQUEST, error.message);
 
-  const { email } = employee;
   const exists = await alreadyExists(email);
   if (exists) {
     throw customError(StatusCodes.CONFLICT, 'Employee already registered');
   }
 
-  await Employee.create(employee);
+  const hashPassword = encryptPassword(password);
+
+  await Employee.create({
+    name, email, password: hashPassword, department, salary, birth_date,
+  });
+
   const result = await Employee.findOne({
     employee,
     attributes: {

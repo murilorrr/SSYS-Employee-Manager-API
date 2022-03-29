@@ -1,5 +1,5 @@
 const { StatusCodes } = require('http-status-codes');
-const { loginService } = require('../../services/login');
+const { login: loginService } = require('../../services/employees');
 
 const login = async (req, res, next) => {
   const { email, password } = req.body;
