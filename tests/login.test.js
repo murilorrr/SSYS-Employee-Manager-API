@@ -26,7 +26,7 @@ const employee = {
 describe('POST /employees/login', () => {
   let response;
 
-  before(async() => {
+  before(async () => {
     Employee.destroy({ where: {} });
     await chai.request(server).post('/employees').set('content-type', 'application/json').send(employee);
   });
@@ -35,13 +35,53 @@ describe('POST /employees/login', () => {
     Employee.destroy({ where: {} });
   });
 
-  it('Quando é criado com sucesso', async () => {
-
-    response = await chai.request(server).post('/employees/login').set('content-type', 'application/json').send(employeeLogin);
+  it('Será validado que é possível fazer login com sucesso', async () => {
+    response = await chai
+      .request(server)
+      .post('/employees/login')
+      .set('content-type', 'application/json')
+      .send(employeeLogin);
 
     expect(response).to.have.status(200);
     expect(response.body).to.have.property('token');
     expect(response.body).to.have.property('token').to.be.a('string');
     expect(response.body).to.have.property('token').have.length.greaterThanOrEqual(1);
+  });
+
+  it('Será validado que não é possível fazer login sem o campo email', async () => {
+    response = await chai
+      .request(server)
+      .post('/employees/login')
+      .set('content-type', 'application/json')
+      .send({ password: employee.password });
+
+    expect(response).to.have.status(400);
+    expect(response.body).to.be.deep.equal({
+      message: '"email" is required',
+    });
+  });
+
+  it('Será validado que não é possível fazer login sem o campo password', async () => {
+    response = await chai
+      .request(server)
+      .post('/employees/login')
+      .set('content-type', 'application/json')
+      .send({ email: employee.email });
+
+    expect(response.status).to.be.equal(400);
+    expect(response.body).to.be.deep.equal({
+      message: '"password" is required',
+    });
+  });
+
+  it('Será validado que não é possível fazer login de um usuário que não existe', async () => {
+    response = await chai
+      .request(server)
+      .post('/employees/login')
+      .set('content-type', 'application/json')
+      .send({ email: `${employee.email}0000`, password: employee.password });
+
+    expect(response.status).to.be.equal(404);
+    expect(response.body).to.be.deep.equal({ message: 'Invalid fields' });
   });
 });
