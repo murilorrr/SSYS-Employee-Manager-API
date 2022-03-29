@@ -1,6 +1,6 @@
 'use strict';
 const { generateNEmployees } = require('../../../utils');
-const { encryptPassword } = require('../../../utils')
+const { encryptPassword } = require('../../../utils');
 const employees = generateNEmployees(Math.ceil(Math.random() * 99));
 
 const defaultEmployee = {
@@ -12,7 +12,7 @@ const defaultEmployee = {
   birth_date: '01-01-1983',
 };
 
-const seeders = [ defaultEmployee ,...employees ]
+const seeders = [defaultEmployee, ...employees];
 seeders.forEach((employee) => {
   employee.password = encryptPassword(employee.password);
 });

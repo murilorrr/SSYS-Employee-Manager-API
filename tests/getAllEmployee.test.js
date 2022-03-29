@@ -41,17 +41,11 @@ describe('GET /employees', () => {
   });
 
   it('Quando são requisitados todos os trabalhadores"employees"', async () => {
+    const loginRequest = await chai.request(server).post('/employees/login').send(defaultEmployee);
 
-    const loginRequest = await chai
-        .request(server)
-        .post("/employees/login")
-        .send(defaultEmployee);
+    token = loginRequest.body.token;
 
-    token = loginRequest.body.token
-
-    response = await chai.request(server)
-    .get('/employees')
-    .set('authorization', token);
+    response = await chai.request(server).get('/employees').set('authorization', token);
 
     employees.forEach((employee) => {
       delete employee.password;

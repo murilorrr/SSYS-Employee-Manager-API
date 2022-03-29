@@ -27,7 +27,7 @@ describe('GET /reports/employees/salary/ (salary report)', () => {
   const employees = generateNEmployees(randomNumberOfEmployeesMaxEleven);
   employees.push(defaultEmployee);
 
-  before(async() => {
+  before(async () => {
     Employee.destroy({ where: {} });
     await Promise.all(
       employees.map((employee) =>
@@ -41,7 +41,6 @@ describe('GET /reports/employees/salary/ (salary report)', () => {
   });
 
   it('Quando são requisitados todos os trabalhadores"employees" em um relatorio de salario', async () => {
-
     const buildReport = (employees) => {
       const report = {};
       let minSalary = 999999;
@@ -64,16 +63,11 @@ describe('GET /reports/employees/salary/ (salary report)', () => {
       delete report[key].password;
     });
 
-    const loginRequest = await chai
-    .request(server)
-    .post("/employees/login")
-    .send(defaultEmployee);
+    const loginRequest = await chai.request(server).post('/employees/login').send(defaultEmployee);
 
-    token = loginRequest.body.token
+    token = loginRequest.body.token;
 
-    response = await chai.request(server)
-    .get('/reports/employees/salary/')
-    .set('authorization', token);
+    response = await chai.request(server).get('/reports/employees/salary/').set('authorization', token);
 
     expect(response.status).to.be.equal(200);
     expect(response.body).to.not.be.equal({});

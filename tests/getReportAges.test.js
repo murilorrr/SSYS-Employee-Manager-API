@@ -27,7 +27,7 @@ describe('GET /reports/employees/age/ (age report)', () => {
   const employees = generateNEmployees(randomNumberOfEmployeesMaxEleven);
   employees.push(defaultEmployee);
 
-  before(async() => {
+  before(async () => {
     Employee.destroy({ where: {} });
     await Promise.all(
       employees.map((employee) =>
@@ -41,26 +41,22 @@ describe('GET /reports/employees/age/ (age report)', () => {
   });
 
   it('Quando são requisitados todos os trabalhadores"employees" em um relatorio de idade', async () => {
+    const loginRequest = await chai.request(server).post('/employees/login').send(defaultEmployee);
 
-    const loginRequest = await chai
-    .request(server)
-    .post("/employees/login")
-    .send(defaultEmployee);
-
-    token = loginRequest.body.token
+    token = loginRequest.body.token;
 
     const buildReport = (employees) => {
       const report = {};
-      const ages = employees.map((employee) => moment(moment(employee.birth_date, "DD-MM-YYYY").format("YYYY-MM-DD")));
+      const ages = employees.map((employee) => moment(moment(employee.birth_date, 'DD-MM-YYYY').format('YYYY-MM-DD')));
       let older = moment.min(ages);
       let younger = moment.max(ages);
 
       employees.forEach((employee) => {
-        if ( employee.birth_date == moment(younger).format("DD-MM-YYYY")) {
+        if (employee.birth_date == moment(younger).format('DD-MM-YYYY')) {
           report.younger = employee;
         }
 
-        if ( employee.birth_date == moment(older).format("DD-MM-YYYY")) {
+        if (employee.birth_date == moment(older).format('DD-MM-YYYY')) {
           report.older = employee;
         }
       });
@@ -75,8 +71,7 @@ describe('GET /reports/employees/age/ (age report)', () => {
     console.table(employees);
     const report = buildReport(employees);
 
-    response = await chai.request(server).get('/reports/employees/age/')
-    .set('authorization', token);
+    response = await chai.request(server).get('/reports/employees/age/').set('authorization', token);
 
     expect(response.status).to.be.equal(200);
     expect(response.body).to.not.be.equal({});

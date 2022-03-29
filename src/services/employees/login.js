@@ -6,7 +6,9 @@ const { generateJWT } = require('../../../utils');
 const { customError } = require('../../../utils');
 
 const loginSchema = Joi.object({
-  email: Joi.string().regex(/\S+@\S+\.\S+/).required(),
+  email: Joi.string()
+    .regex(/\S+@\S+\.\S+/)
+    .required(),
   password: Joi.string().min(6).required(),
 });
 

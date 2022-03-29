@@ -31,7 +31,6 @@ describe('POST /employees', () => {
   });
 
   it('Quando é criado com sucesso', async () => {
-
     expect(response).to.have.status(201);
 
     expect(response.body).to.be.a('object');
