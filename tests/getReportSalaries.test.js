@@ -90,4 +90,17 @@ describe('GET /reports/employees/salary/ (salary report)', () => {
     expect(response.status).to.be.equal(404);
     expect(response.body).to.be.deep.equal({ message: 'Invalid fields' });
   });
+
+  it('Não será possivel fazer o report caso não existam usuários', async () => {
+    const loginRequest = await chai.request(server).post('/employees/login').send(defaultEmployee);
+
+    token = loginRequest.body.token;
+
+    Employee.destroy({ where: {} });
+
+    response = await chai.request(server).get('/reports/employees/salary/').set('authorization', token);
+
+    expect(response.status).to.be.equal(404);
+    expect(response.body).to.be.deep.equal({ message: 'Employees not found' });
+  });
 });
