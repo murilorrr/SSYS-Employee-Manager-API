@@ -3,7 +3,7 @@ const errorMiddleware = require("../src/middlewares/errorMiddleware");
 const { expect } = require("chai")
 
 const errorCustom = {
-  statusCode: 404,
+  code: 404,
   message: "NotFound",
 };
 
@@ -61,6 +61,6 @@ describe("Teste de Unidade do Middleware de error", () => {
     expect(res).have.property("code");
     expect(res.code).to.be.equal(500);
     expect(res.data).to.be.a("object");
-    expect(res.data).to.be.deep.equal({ message: "Internal error", });
+    expect(res.data).to.be.deep.equal({ message: "Internal Server Error", });
   });
 });
