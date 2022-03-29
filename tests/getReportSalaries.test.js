@@ -10,7 +10,7 @@ const { it } = require('mocha');
 
 const { expect } = chai;
 
-describe.only('GET /reports/employees/salary/', () => {
+describe('GET /reports/employees/salary/', () => {
   let response;
 
   const randomNumberOfEmployeesMaxEleven = Math.ceil(Math.random() * 10);

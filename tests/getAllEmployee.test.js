@@ -39,13 +39,12 @@ describe('GET /employees', () => {
 
     console.log('employees:');
     console.table(employees);
+    console.table(response.body);
 
-    response.body.forEach((employee, index) => {
+    response.body.forEach((employee) => {
       expect(employee).have.property('id');
-      Object.keys(employee).forEach((key) => {
-        if (key === 'id') return expect(employee[key]).to.be.not.equal('');
-        expect(employee[key]).to.be.equal(employees[index][key]);
-      });
+      delete employee.id;
+      expect(employees).to.be.deep.includes(employee);
     });
   });
 });

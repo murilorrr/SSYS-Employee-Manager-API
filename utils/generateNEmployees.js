@@ -1,7 +1,7 @@
 const employeeFactory = require('./employeeFactory');
 
 const generateNEmployees = (numberOfEmployees) => {
-  arrayOfEmployees = [];
+  const arrayOfEmployees = Array();
   for (let index = 0; index < numberOfEmployees; index++) {
     arrayOfEmployees.push(employeeFactory());
   }
