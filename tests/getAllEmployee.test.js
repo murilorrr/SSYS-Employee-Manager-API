@@ -27,11 +27,7 @@ describe('GET /employees', () => {
   it('Quando são requisitados todos os trabalhadores"employees"', async () => {
     await Promise.all(
       employees.map((employee) =>
-        chai
-          .request(server)
-          .post('/employees')
-          .set('content-type', 'application/json')
-          .send(employee)
+        chai.request(server).post('/employees').set('content-type', 'application/json').send(employee)
       )
     );
 

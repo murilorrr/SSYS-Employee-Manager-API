@@ -30,11 +30,7 @@ describe('POST /employees', () => {
   });
 
   it('Quando é criado com sucesso', async () => {
-    response = await chai
-      .request(server)
-      .post('/employees')
-      .set('content-type', 'application/json')
-      .send(employee);
+    response = await chai.request(server).post('/employees').set('content-type', 'application/json').send(employee);
 
     expect(response).to.have.status(201);
 

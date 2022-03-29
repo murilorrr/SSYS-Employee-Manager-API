@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node ./src/server/server.js",
+    "db:start": "npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
     "test": "mocha tests/*$NAME*.{test,spec}.js -timeout 10000 --exit",
     "coverage": "nyc --reporter=text mocha --exit",
     "lint": "./node_modules/.bin/eslint . --ext .js,.jsx,.ts,.tsx",

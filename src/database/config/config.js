@@ -1,7 +1,7 @@
 require('dotenv').config();
 
 const options = {
-  host: process.env.DATABASE_HOST || '127.0.0.1',
+  host: process.env.DATABASE_HOST || 'mysql', // '127.0.0.1'
   port: process.env.DATABASE_PORT || '3306',
   username: process.env.DATABASE_USER || 'root',
   password: process.env.DATABASE_PASSWORD || 'password',

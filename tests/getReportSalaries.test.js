@@ -1,38 +1,42 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const { generateNEmployees } = require('../utils');
+const { Employee } = require('../src/database/models');
 
 chai.use(chaiHttp);
 
 const server = require('../src/server/app');
 const { it } = require('mocha');
-const { report } = require('../src/server/app');
 
 const { expect } = chai;
 
-describe('GET /reports/employees/salary/', () => {
+describe.only('GET /reports/employees/salary/', () => {
   let response;
 
   const randomNumberOfEmployeesMaxEleven = Math.ceil(Math.random() * 10);
   const employees = generateNEmployees(randomNumberOfEmployeesMaxEleven);
+  console.log('employees:');
+  console.table(employees);
 
-  before(async () => {});
+  before(() => {
+    Employee.destroy({ where: {} });
+  });
+
+  after(() => {
+    Employee.destroy({ where: {} });
+  });
 
   it('Quando são requisitados todos os trabalhadores"employees"', async () => {
     await Promise.all(
       employees.map((employee) =>
-        chai
-          .request(server)
-          .post('/employees')
-          .set('content-type', 'application/json')
-          .send(employee)
+        chai.request(server).post('/employees').set('content-type', 'application/json').send(employee)
       )
     );
 
     const buildReport = (employees) => {
-      report = {};
-      const minSalary = 0;
-      const maxSalary = 0;
+      const report = {};
+      let minSalary = 999999;
+      let maxSalary = 0;
       employees.forEach((employee) => {
         if (employee.salary < minSalary) {
           minSalary = employee.salary;
@@ -43,19 +47,24 @@ describe('GET /reports/employees/salary/', () => {
           report.highest = employee;
         }
       });
+      return report;
     };
 
-    buildReport(employees);
+    const report = buildReport(employees);
+    Object.keys(report).forEach((key) => {
+      delete report[key].password;
+    });
 
     response = await chai.request(server).get('/reports/employees/salary/');
 
-    report.forEach((employee) => {
-      delete employee.password;
+    expect(response.status).to.be.equal(200);
+    expect(response.body).to.not.be.equal({});
+
+    Object.keys(response.body).forEach((key) => {
+      Object.keys(response.body[key]).forEach((employeeKeys) => {
+        if (employeeKeys === 'id') return expect(response.body[key][employeeKeys]).to.not.be.equal('');
+        expect(response.body[key][employeeKeys]).to.be.equal(report[key][employeeKeys]);
+      });
     });
-
-    console.log('employees:');
-    console.table(employees);
-
-    expect(response.body).to.be.deep.equal(report);
   });
 });

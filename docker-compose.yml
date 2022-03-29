@@ -1,22 +1,28 @@
-version: '3.7'
+version: '3'
+
 services:
   node:
     restart: always
-    environment:
-      - HOST=mongo
     build: .
     ports:
       - 3001:3001
     volumes:
-      - ./:/code
+      - .:/usr/app
     depends_on:
-      - mongo
-  mongo:
-    image: mongo
+      - db
+
+  db:
+    image: mysql:5.7.31
     restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=root
+      - MYSQL_DATABASE=SSYS
     ports:
-      - 27017:27017
+      - '3306:3306'
     volumes:
-      - mongodb:/data/db
+      - db:/var/lib/mysql
+
 volumes:
-  mongodb:
+  db:
