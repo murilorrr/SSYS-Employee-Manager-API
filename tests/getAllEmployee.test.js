@@ -1,9 +1,5 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
-const { MongoClient } = require('mongodb');
-const connectionMock = require('../utils/connectionMock');
-const dbName = process.env.DATABASE_NAME;
-const sinon = require('sinon');
 const { generateNEmployees } = require('../utils');
 
 chai.use(chaiHttp);
@@ -14,19 +10,12 @@ const { it } = require('mocha');
 const { expect } = chai;
 
 describe.only('GET /employees', () => {
-  let connection;
   let response;
-  let db;
 
   const randomNumberOfEmployeesMaxEleven = Math.ceil(Math.random() * 10);
   const employees = generateNEmployees(randomNumberOfEmployeesMaxEleven);
 
   before(async () => {
-    connection = await connectionMock();
-
-    sinon.stub(MongoClient, 'connect').resolves(connection);
-
-    db = connection.db(dbName);
   });
 
   it('Quando são requisitados todos os trabalhadores"employees"', async () => {
@@ -48,9 +37,6 @@ describe.only('GET /employees', () => {
 
     employees.forEach((employee) => {
       delete employee.password;
-    });
-    response.body.forEach((employee) => {
-      delete employee.id;
     });
 
     console.log('employees:');

@@ -1,8 +1,5 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
-const { MongoClient } = require('mongodb');
-const connectionMock = require('../utils/connectionMock');
-const dbName = process.env.DATABASE_NAME;
 const sinon = require('sinon');
 
 chai.use(chaiHttp);
@@ -22,20 +19,14 @@ const employee = {
 };
 
 describe('POST /employees', () => {
-  let connection;
   let response;
-  let db;
 
   before(async () => {
-    connection = await connectionMock();
 
-    sinon.stub(MongoClient, 'connect').resolves(connection);
-
-    db = connection.db(dbName);
   });
 
   after(async () => {
-    MongoClient.connect.restore();
+
   });
 
   it('Quando é criado com sucesso', async () => {
