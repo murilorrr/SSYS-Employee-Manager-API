@@ -1,14 +1,13 @@
-const sinon = require("sinon");
-const errorMiddleware = require("../src/middlewares/errorMiddleware");
-const { expect } = require("chai")
+const sinon = require('sinon');
+const errorMiddleware = require('../src/middlewares/errorMiddleware');
+const { expect } = require('chai');
 
 const errorCustom = {
   code: 404,
-  message: "NotFound",
+  message: 'NotFound'
 };
 
-
-describe("Teste de Unidade do Middleware de error", () => {
+describe('Teste de Unidade do Middleware de error', () => {
   /**
    * Mocked Express Request object.
    */
@@ -30,7 +29,7 @@ describe("Teste de Unidade do Middleware de error", () => {
   beforeEach(() => {
     req = {
       params: {},
-      body: {},
+      body: {}
     };
 
     res = {
@@ -42,25 +41,25 @@ describe("Teste de Unidade do Middleware de error", () => {
       },
       json(payload) {
         this.data = payload;
-      },
+      }
     };
   });
 
-  it("quando há um erro personalizado", () => {
+  it('quando há um erro personalizado', () => {
     errorMiddleware(errorCustom, req, res, next);
 
     expect(res).have.property('code');
     expect(res.code).to.be.equal(404);
     expect(res.data).to.be.a('object');
-    expect(res.data).to.be.deep.equal({ message: "NotFound" });
+    expect(res.data).to.be.deep.equal({ message: 'NotFound' });
   });
 
-  it("quando não há um erro personalizado", () => {
-    errorMiddleware(new Error, req, res, next);
+  it('quando não há um erro personalizado', () => {
+    errorMiddleware(new Error(), req, res, next);
 
-    expect(res).have.property("code");
+    expect(res).have.property('code');
     expect(res.code).to.be.equal(500);
-    expect(res.data).to.be.a("object");
-    expect(res.data).to.be.deep.equal({ message: "Internal Server Error", });
+    expect(res.data).to.be.a('object');
+    expect(res.data).to.be.deep.equal({ message: 'Internal Server Error' });
   });
 });

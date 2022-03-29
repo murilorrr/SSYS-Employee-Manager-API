@@ -16,7 +16,7 @@ const defaultEmployee = {
   email: 'skywalker@ssys.com.br',
   password: 'beStrong',
   salary: '4000.00',
-  birth_date: '01-01-1983',
+  birth_date: '01-01-1983'
 };
 
 describe('GET /employees', () => {
@@ -31,7 +31,11 @@ describe('GET /employees', () => {
     Employee.destroy({ where: {} });
     await Promise.all(
       employees.map((employee) =>
-        chai.request(server).post('/employees').set('content-type', 'application/json').send(employee)
+        chai
+          .request(server)
+          .post('/employees')
+          .set('content-type', 'application/json')
+          .send(employee)
       )
     );
   });

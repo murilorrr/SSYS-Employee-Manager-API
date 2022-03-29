@@ -18,9 +18,7 @@ const alreadyExists = async (email) => {
 };
 
 module.exports = async (employee) => {
-  const {
-    name, email, password, department, salary, birth_date,
-  } = employee;
+  const { name, email, password, department, salary, birth_date } = employee;
   const { error } = employeeSchema.validate(employee);
   if (error) throw customError(StatusCodes.BAD_REQUEST, error.message);
 

@@ -9,6 +9,8 @@
     "ecmaVersion": "latest"
   },
   "rules": {
-    "camelcase": 0
+    "camelcase": 0,
+    "object-curly-newline": 0,
+    "implicit-arrow-linebreak": 0
   }
 }

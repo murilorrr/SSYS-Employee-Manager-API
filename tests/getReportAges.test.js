@@ -16,7 +16,7 @@ const defaultEmployee = {
   email: 'skywalker@ssys.com.br',
   password: 'beStrong',
   salary: '4000.00',
-  birth_date: '01-01-1983',
+  birth_date: '01-01-1983'
 };
 
 const employee = {
@@ -25,7 +25,7 @@ const employee = {
   email: 'skywalker@ssys.com.br',
   password: 'beStrong',
   salary: '4000.00',
-  birth_date: '01-01-1983',
+  birth_date: '01-01-1983'
 };
 
 describe('GET /reports/employees/age/ (age report)', () => {
@@ -40,7 +40,11 @@ describe('GET /reports/employees/age/ (age report)', () => {
     Employee.destroy({ where: {} });
     await Promise.all(
       employees.map((employee) =>
-        chai.request(server).post('/employees').set('content-type', 'application/json').send(employee)
+        chai
+          .request(server)
+          .post('/employees')
+          .set('content-type', 'application/json')
+          .send(employee)
       )
     );
   });
@@ -56,7 +60,9 @@ describe('GET /reports/employees/age/ (age report)', () => {
 
     const buildReport = (employees) => {
       const report = {};
-      const ages = employees.map((employee) => moment(moment(employee.birth_date, 'DD-MM-YYYY').format('YYYY-MM-DD')));
+      const ages = employees.map((employee) =>
+        moment(moment(employee.birth_date, 'DD-MM-YYYY').format('YYYY-MM-DD'))
+      );
       let older = moment.min(ages);
       let younger = moment.max(ages);
 
@@ -80,14 +86,18 @@ describe('GET /reports/employees/age/ (age report)', () => {
     console.table(employees);
     const report = buildReport(employees);
 
-    response = await chai.request(server).get('/reports/employees/age/').set('authorization', token);
+    response = await chai
+      .request(server)
+      .get('/reports/employees/age/')
+      .set('authorization', token);
 
     expect(response.status).to.be.equal(200);
     expect(response.body).to.not.be.equal({});
 
     Object.keys(response.body).forEach((key) => {
       Object.keys(response.body[key]).forEach((employeeKeys) => {
-        if (employeeKeys === 'id') return expect(response.body[key][employeeKeys]).to.not.be.equal('');
+        if (employeeKeys === 'id')
+          return expect(response.body[key][employeeKeys]).to.not.be.equal('');
         expect(response.body[key][employeeKeys]).to.be.equal(report[key][employeeKeys]);
       });
     });
@@ -111,7 +121,10 @@ describe('GET /reports/employees/age/ (age report)', () => {
 
     Employee.destroy({ where: {} });
 
-    response = await chai.request(server).get('/reports/employees/age/').set('authorization', token);
+    response = await chai
+      .request(server)
+      .get('/reports/employees/age/')
+      .set('authorization', token);
 
     expect(response.status).to.be.equal(404);
     expect(response.body).to.be.deep.equal({ message: 'Employees not found' });

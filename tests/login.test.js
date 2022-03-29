@@ -11,7 +11,7 @@ const { expect } = chai;
 
 const employeeLogin = {
   email: 'skywalker@ssys.com.br',
-  password: 'beStrong',
+  password: 'beStrong'
 };
 
 const employee = {
@@ -20,7 +20,7 @@ const employee = {
   email: 'skywalker@ssys.com.br',
   password: 'beStrong',
   salary: '4000.00',
-  birth_date: '01-01-1983',
+  birth_date: '01-01-1983'
 };
 
 describe('POST /employees/login', () => {
@@ -28,7 +28,11 @@ describe('POST /employees/login', () => {
 
   before(async () => {
     Employee.destroy({ where: {} });
-    await chai.request(server).post('/employees').set('content-type', 'application/json').send(employee);
+    await chai
+      .request(server)
+      .post('/employees')
+      .set('content-type', 'application/json')
+      .send(employee);
   });
 
   after(() => {
@@ -57,7 +61,7 @@ describe('POST /employees/login', () => {
 
     expect(response).to.have.status(400);
     expect(response.body).to.be.deep.equal({
-      message: '"email" is required',
+      message: '"email" is required'
     });
   });
 
@@ -70,7 +74,7 @@ describe('POST /employees/login', () => {
 
     expect(response.status).to.be.equal(400);
     expect(response.body).to.be.deep.equal({
-      message: '"password" is required',
+      message: '"password" is required'
     });
   });
 

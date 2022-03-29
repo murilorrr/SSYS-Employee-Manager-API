@@ -15,7 +15,7 @@ const employee = {
   email: 'skywalker@ssys.com.br',
   password: 'beStrong',
   salary: '4000.00',
-  birth_date: '01-01-1983',
+  birth_date: '01-01-1983'
 };
 
 describe('POST /employees', () => {
@@ -23,7 +23,11 @@ describe('POST /employees', () => {
 
   before(async () => {
     Employee.destroy({ where: {} });
-    response = await chai.request(server).post('/employees').set('content-type', 'application/json').send(employee);
+    response = await chai
+      .request(server)
+      .post('/employees')
+      .set('content-type', 'application/json')
+      .send(employee);
   });
 
   after(() => {
@@ -45,18 +49,28 @@ describe('POST /employees', () => {
   });
 
   it('Quando já existe o usuário cadastrado', async () => {
-    response = await chai.request(server).post('/employees').set('content-type', 'application/json').send(employee);
+    response = await chai
+      .request(server)
+      .post('/employees')
+      .set('content-type', 'application/json')
+      .send(employee);
 
     expect(response).to.have.status(409);
     expect(response.body).to.be.a('object');
-    expect(response.body).to.be.deep.equal({ message: "Employee already registered" });
+    expect(response.body).to.be.deep.equal({ message: 'Employee already registered' });
   });
 
   it('Quando é criado sem sucesso', async () => {
-    response = await chai.request(server).post('/employees').set('content-type', 'application/json').send({...employee, password: '1'});
+    response = await chai
+      .request(server)
+      .post('/employees')
+      .set('content-type', 'application/json')
+      .send({ ...employee, password: '1' });
 
     expect(response).to.have.status(400);
     expect(response.body).to.be.a('object');
-    expect(response.body).to.be.deep.equal({ message: "\"password\" length must be at least 6 characters long" });
+    expect(response.body).to.be.deep.equal({
+      message: '"password" length must be at least 6 characters long'
+    });
   });
 });

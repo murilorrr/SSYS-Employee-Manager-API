@@ -5,7 +5,8 @@ const { Employee } = require('../../database/models');
 
 const buildReport = (employees) => {
   const report = {};
-  const ages = employees.map((employee) => moment(moment(employee.birth_date, 'DD-MM-YYYY').format('YYYY-MM-DD')));
+  const ages = employees.map((employee) =>
+    moment(moment(employee.birth_date, 'DD-MM-YYYY').format('YYYY-MM-DD')));
   const older = moment.min(ages);
   const younger = moment.max(ages);
 

@@ -6,36 +6,36 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER,
+        type: Sequelize.INTEGER
       },
       name: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: false
       },
       email: {
         type: Sequelize.STRING,
         allowNull: false,
-        unique: true,
+        unique: true
       },
       department: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: false
       },
       password: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: false
       },
       salary: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: false
       },
       birth_date: {
         type: Sequelize.STRING,
-        allowNull: false,
-      },
+        allowNull: false
+      }
     });
   },
   down: async (queryInterface, Sequelize) => {
     await queryInterface.dropTable('Employees');
-  },
+  }
 };

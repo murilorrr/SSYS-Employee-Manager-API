@@ -9,7 +9,7 @@ const defaultEmployee = {
   email: 'skywalker@ssys.com.br',
   password: 'beStrong',
   salary: '4000.00',
-  birth_date: '01-01-1983',
+  birth_date: '01-01-1983'
 };
 
 const seeders = [defaultEmployee, ...employees];
@@ -24,5 +24,5 @@ module.exports = {
 
   down: async (queryInterface, Sequelize) => {
     await queryInterface.bulkDelete('users', null, {});
-  },
+  }
 };

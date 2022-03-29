@@ -7,11 +7,11 @@ module.exports = (sequelize, DataTypes) => {
       department: DataTypes.STRING,
       password: DataTypes.STRING,
       salary: DataTypes.STRING,
-      birth_date: DataTypes.STRING,
+      birth_date: DataTypes.STRING
     },
     {
       timestamps: false,
-      tableName: 'Employees',
+      tableName: 'Employees'
     }
   );
 
