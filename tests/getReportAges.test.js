@@ -2,7 +2,7 @@ const chai = require('chai');
 const chaiHttp = require('chai-http');
 const { generateNEmployees } = require('../utils');
 const { Employee } = require('../src/database/models');
-
+const moment = require('moment');
 chai.use(chaiHttp);
 
 const server = require('../src/server/app');
@@ -10,7 +10,7 @@ const { it } = require('mocha');
 
 const { expect } = chai;
 
-describe('GET /reports/employees/salary/ (salary report)', () => {
+describe.only('GET /reports/employees/age/ (age report)', () => {
   let response;
 
   const randomNumberOfEmployeesMaxEleven = Math.ceil(Math.random() * 10);
@@ -26,7 +26,7 @@ describe('GET /reports/employees/salary/ (salary report)', () => {
     Employee.destroy({ where: {} });
   });
 
-  it('Quando são requisitados todos os trabalhadores"employees" em um relatorio de salario', async () => {
+  it('Quando são requisitados todos os trabalhadores"employees" em um relatorio de idade', async () => {
     await Promise.all(
       employees.map((employee) =>
         chai.request(server).post('/employees').set('content-type', 'application/json').send(employee)
@@ -35,25 +35,29 @@ describe('GET /reports/employees/salary/ (salary report)', () => {
 
     const buildReport = (employees) => {
       const report = {};
-      let minSalary = 999999;
-      let maxSalary = 0;
+      const ages = employees.map((employee) => moment(moment(employee.birth_date, "DD-MM-YYYY").format("YYYY-MM-DD")));
+      let older = moment.min(ages);
+      let younger = moment.max(ages);
+
       employees.forEach((employee) => {
-        if (employee.salary < minSalary) {
-          minSalary = employee.salary;
-          report.lowest = employee;
+        if ( employee.birth_date == moment(younger).format("DD-MM-YYYY")) {
+          report.younger = employee;
         }
-        if (employee.salary > maxSalary) {
-          maxSalary = employee.salary;
-          report.highest = employee;
+
+        if ( employee.birth_date == moment(older).format("DD-MM-YYYY")) {
+          report.older = employee;
         }
       });
+
+      Object.keys(report).forEach((key) => {
+        delete report[key].password;
+      });
+
       return report;
     };
 
+    console.table(employees);
     const report = buildReport(employees);
-    Object.keys(report).forEach((key) => {
-      delete report[key].password;
-    });
 
     response = await chai.request(server).get('/reports/employees/salary/');
 
