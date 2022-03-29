@@ -1,14 +1,11 @@
-const Employee = require('../../model')('Employee');
+const { Employee } = require('../../database/models');
 
 module.exports = async () => {
-  const employees = await Employee.getAll();
-
-  const employeesWithOutPassword = [];
-
-  employees.forEach((employee) => {
-    const { _id: id, password, ...outherKeys } = employee;
-    employeesWithOutPassword.push({ ...outherKeys, id });
+  const employees = await Employee.findAll({
+    attributes: {
+      exclude: ['password'],
+    },
   });
 
-  return employeesWithOutPassword;
+  return employees;
 };
