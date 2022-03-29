@@ -10,16 +10,30 @@ const { it } = require('mocha');
 
 const { expect } = chai;
 
+const defaultEmployee = {
+  name: 'Anakin Skywalker',
+  department: 'Architecture',
+  email: 'skywalker@ssys.com.br',
+  password: 'beStrong',
+  salary: '4000.00',
+  birth_date: '01-01-1983',
+};
+
 describe('GET /reports/employees/age/ (age report)', () => {
   let response;
+  let token;
 
   const randomNumberOfEmployeesMaxEleven = Math.ceil(Math.random() * 10);
   const employees = generateNEmployees(randomNumberOfEmployeesMaxEleven);
-  console.log('employees:');
-  console.table(employees);
+  employees.push(defaultEmployee);
 
-  before(() => {
+  before(async() => {
     Employee.destroy({ where: {} });
+    await Promise.all(
+      employees.map((employee) =>
+        chai.request(server).post('/employees').set('content-type', 'application/json').send(employee)
+      )
+    );
   });
 
   after(() => {
@@ -27,11 +41,13 @@ describe('GET /reports/employees/age/ (age report)', () => {
   });
 
   it('Quando são requisitados todos os trabalhadores"employees" em um relatorio de idade', async () => {
-    await Promise.all(
-      employees.map((employee) =>
-        chai.request(server).post('/employees').set('content-type', 'application/json').send(employee)
-      )
-    );
+
+    const loginRequest = await chai
+    .request(server)
+    .post("/employees/login")
+    .send(defaultEmployee);
+
+    token = loginRequest.body.token
 
     const buildReport = (employees) => {
       const report = {};
@@ -59,7 +75,8 @@ describe('GET /reports/employees/age/ (age report)', () => {
     console.table(employees);
     const report = buildReport(employees);
 
-    response = await chai.request(server).get('/reports/employees/age/');
+    response = await chai.request(server).get('/reports/employees/age/')
+    .set('authorization', token);
 
     expect(response.status).to.be.equal(200);
     expect(response.body).to.not.be.equal({});

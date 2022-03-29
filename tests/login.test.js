@@ -26,8 +26,9 @@ const employee = {
 describe('POST /employees/login', () => {
   let response;
 
-  before(() => {
+  before(async() => {
     Employee.destroy({ where: {} });
+    await chai.request(server).post('/employees').set('content-type', 'application/json').send(employee);
   });
 
   after(() => {
@@ -35,7 +36,6 @@ describe('POST /employees/login', () => {
   });
 
   it('Quando é criado com sucesso', async () => {
-    await chai.request(server).post('/employees').set('content-type', 'application/json').send(employee);
 
     response = await chai.request(server).post('/employees/login').set('content-type', 'application/json').send(employeeLogin);
 
