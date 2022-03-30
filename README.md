@@ -105,6 +105,6 @@ All kinds of contributions are very welcome and appreciated!
 - ⭐️ Star the project
 - 🐛 Find and report issues
 - 📥 Submit PRs to help solve issues or add features
-- ✋ Influence the future of ToDo-Ebytr with feature requests
+- ✋ Influence the future of SSYS challenges with feature requests
 
 To learn how to contribute and a little more about the implemented architecture, read the [Contributing Guide](/CONTRIBUTION.md) before making the pull request.
