@@ -1,4 +1,4 @@
-const { StatusCodes } = require('http-status-codes');
+const defaultResponseOK = require('../../../utils/defaultResponseOk');
 const { login: loginService } = require('../../services/employees');
 
 const login = async (req, res, next) => {
@@ -7,7 +7,7 @@ const login = async (req, res, next) => {
   try {
     const result = await loginService(email, password);
 
-    return res.status(StatusCodes.OK).json(result);
+    return defaultResponseOK(res, result);
   } catch (err) {
     return next(err);
   }

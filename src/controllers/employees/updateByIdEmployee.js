@@ -1,4 +1,4 @@
-const { StatusCodes } = require('http-status-codes');
+const defaultResponseOK = require('../../../utils/defaultResponseOk');
 const { updateById } = require('../../services/employees');
 
 const updateOneEmployee = async (req, res, next) => {
@@ -6,7 +6,7 @@ const updateOneEmployee = async (req, res, next) => {
   const employeePatch = req.body;
   try {
     const employee = await updateById(id, employeePatch);
-    return res.status(StatusCodes.OK).json(employee);
+    return defaultResponseOK(res, employee);
   } catch (error) {
     return next(error);
   }
