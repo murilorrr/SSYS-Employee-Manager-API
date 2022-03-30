@@ -1,7 +1,5 @@
 const moment = require('moment');
-const { StatusCodes } = require('http-status-codes');
-const { customError } = require('../../../utils');
-const employeesWithOutPass = require('../../../utils/findEmployeesWithOutPass');
+const { validadeEmployeesExists } = require('./index');
 
 const buildReport = (employees) => {
   const report = {};
@@ -23,10 +21,7 @@ const buildReport = (employees) => {
 };
 
 module.exports = async () => {
-  const employees = await employeesWithOutPass();
-  if (employees.length === 0) {
-    throw customError(StatusCodes.NOT_FOUND, 'Employees not found');
-  }
+  const employees = await validadeEmployeesExists();
 
   const report = buildReport(employees);
   return report;
