@@ -77,6 +77,7 @@ http://localhost:8000/
 ### Default method
 
 #### Install backend folder dependencies and start node server:
+#### *With the mysql running in your machine*
 
 ```sh
 $ npm install
