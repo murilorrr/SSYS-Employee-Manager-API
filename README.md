@@ -3,6 +3,7 @@
 <p align="center">
   <a href="https://lgtm.com/projects/g/murilorsv14/SSYS-Employee-Manager-API/alerts/"><img alt="Total alerts" src="https://img.shields.io/lgtm/alerts/g/murilorsv14/SSYS-Employee-Manager-API.svg?logo=lgtm&logoWidth=18"/></a>
   <a href="https://lgtm.com/projects/g/murilorsv14/SSYS-Employee-Manager-API/context:javascript"><img alt="Language grade: JavaScript" src="https://img.shields.io/lgtm/grade/javascript/g/murilorsv14/SSYS-Employee-Manager-API.svg?logo=lgtm&logoWidth=18"/></a>
+  <a href="https://codeclimate.com/github/murilorsv14/SSYS-Employee-Manager-API/maintainability"><img src="https://api.codeclimate.com/v1/badges/5ed4fd38a72711c2047a/maintainability" /></a>
   <img alt="GitHub Top Language" src="https://img.shields.io/github/languages/top/murilorsv14/SSYS-Employee-Manager-API?color=6E40C9">
   <a href="https://github.com/murilorsv14/SSYS-Employee-Manager-API/commits/main">
     <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/murilorsv14/SSYS-Employee-Manager-API?color=6E40C9">
