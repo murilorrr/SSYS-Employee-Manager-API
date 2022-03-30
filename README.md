@@ -1,7 +1,16 @@
 # SSYS-Employee-Manager
 
-[![Total alerts](https://img.shields.io/lgtm/alerts/g/murilorsv14/SSYS-Employee-Manager-API.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/murilorsv14/SSYS-Employee-Manager-API/alerts/)
-[![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/murilorsv14/SSYS-Employee-Manager-API.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/murilorsv14/SSYS-Employee-Manager-API/context:javascript)
+<p align="center">
+  <a href="https://lgtm.com/projects/g/murilorsv14/SSYS-Employee-Manager-API/alerts/"><img alt="Total alerts" src="https://img.shields.io/lgtm/alerts/g/murilorsv14/SSYS-Employee-Manager-API.svg?logo=lgtm&logoWidth=18"/></a>
+  <a href="https://lgtm.com/projects/g/murilorsv14/SSYS-Employee-Manager-API/context:javascript"><img alt="Language grade: JavaScript" src="https://img.shields.io/lgtm/grade/javascript/g/murilorsv14/SSYS-Employee-Manager-API.svg?logo=lgtm&logoWidth=18"/></a>
+  <img alt="GitHub Top Language" src="https://img.shields.io/github/languages/top/murilorsv14/SSYS-Employee-Manager-API?color=6E40C9">
+  <a href="https://github.com/murilorsv14/SSYS-Employee-Manager-API/commits/main">
+    <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/murilorsv14/SSYS-Employee-Manager-API?color=6E40C9">
+  </a>
+  <a href="https://opensource.org/licenses/MIT"><img
+src="https://img.shields.io/badge/License-MIT-yellow.svg" /></a>
+  <a href="https://github.com/murilorsv14/SSYS-Employee-Manager-API/issues"><img src="https://camo.githubusercontent.com/b9825004b96d28bb7ed515dc3d7c3a3aa3800b3211ef8a7f32820c0019a24e29/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f6973737565732f74657277616e6572696b2f5363726f6c6c547269676765722e737667" alt="Issues" data-canonical-src="https://img.shields.io/github/issues/murilorsv14/SSYS-Employee-Manager-API.svg" style="max-width: 100%;"></a>
+</p>
 
 <p align="center">A minimal and clean API Management</p>
 
@@ -10,6 +19,8 @@
 <p align="center">
   <a href="#zap-tech-stack">Tech Stack</a> •
   <a href="#handshake-contributing">Contributing</a> •
+  <a href="#-getting-started">Getting Started</a> •
+  <a href="#-next-steps">Next Steps</a> •
   <a href="https://github.com/murilorsv14">About Me</a>
 </p>
 
@@ -94,6 +105,6 @@ All kinds of contributions are very welcome and appreciated!
 - ⭐️ Star the project
 - 🐛 Find and report issues
 - 📥 Submit PRs to help solve issues or add features
-- ✋ Influence the future of ToDo-Ebytr with feature requests
+- ✋ Influence the future of SSYS challenges with feature requests
 
 To learn how to contribute and a little more about the implemented architecture, read the [Contributing Guide](/CONTRIBUTION.md) before making the pull request.
