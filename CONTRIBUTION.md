@@ -58,8 +58,8 @@ We decided to follow some MSC to guide our backend architecture. Here is a quick
   - `middlewares`: Is a type of controller, but can be reused for authentication or error handling functions for example;
   - `routes`: This layer will tell which endpoint will operate for each controller;
   - `server`: Here our server is instantiated and identifies the routes and entities;
+  - `utils`: Here are custom functions to help our application;
 - `test`: This layer makes everything, including coffee;
-- `utils`: Here are custom functions to help our application;
 
 > This project has integration with LGTM automated code review
 
