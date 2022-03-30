@@ -16,7 +16,14 @@ const app = express();
 app.use(bodyParser.json());
 app.use(limiter);
 
-app.get('/', (req, res) => res.status(StatusCodes.OK).json({ message: 'are you mad?' }));
+app.get('/', (req, res) =>
+  res
+    .status(StatusCodes.OK)
+    .json({
+      message:
+        'You are my guest, if you already have login "POST /employees/login", else you can create your employee in database with "POST /employee"',
+    }),
+);
 
 app.use('/employees', employee);
 
