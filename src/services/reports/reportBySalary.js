@@ -1,4 +1,4 @@
-const { validadeEmployeesExists } = require('./index');
+const { returnEmployeesIfExists } = require('./index');
 
 const buildReport = (employees) => {
   const report = {};
@@ -18,7 +18,7 @@ const buildReport = (employees) => {
 };
 
 module.exports = async () => {
-  const employees = await validadeEmployeesExists();
+  const employees = await returnEmployeesIfExists();
 
   const report = buildReport(employees);
   return report;
