@@ -1,6 +1,6 @@
 'use strict';
-const { generateNEmployees } = require('../../../utils');
-const { encryptPassword } = require('../../../utils');
+const { generateNEmployees } = require('../../utils');
+const { encryptPassword } = require('../../utils');
 const employees = generateNEmployees(Math.ceil(Math.random() * 99));
 
 const defaultEmployee = {

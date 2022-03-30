@@ -39,7 +39,7 @@ module.exports = async (employee) => {
   });
 
   const result = await Employee.findOne({
-    employee,
+    where: { email },
     attributes: {
       exclude: ['password'],
     },
