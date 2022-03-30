@@ -17,6 +17,10 @@ src="https://img.shields.io/badge/License-MIT-yellow.svg" /></a>
 <p align="center"><i>"What describes an employee?" - CEO in anywere</i> </p>
 
 <p align="center">
+    <img src="https://github.com/murilorsv14/SSYS-Employee-Manager-API/blob/main/API.png?raw=true" width="49.5%" heigth="50%" title="Api communication">
+</p>
+
+<p align="center">
   <a href="#zap-tech-stack">Tech Stack</a> •
   <a href="#handshake-contributing">Contributing</a> •
   <a href="#-getting-started">Getting Started</a> •
