@@ -4,6 +4,8 @@ services:
   node:
     restart: always
     build: .
+    environment:
+      - DATABASE_HOST=mysql
     ports:
       - 8000:8000
     volumes:

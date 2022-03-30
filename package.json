@@ -2,7 +2,7 @@
   "name": "ssys-employee-manager",
   "version": "1.0.0",
   "description": "sistema de relatório de empregados",
-  "main": "index.js",
+  "main": "src/server/server.js",
   "scripts": {
     "start": "npm run db:start && node ./src/server/server.js",
     "db:start": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
