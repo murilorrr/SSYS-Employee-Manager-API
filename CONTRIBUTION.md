@@ -61,8 +61,6 @@ We decided to follow some MSC to guide our backend architecture. Here is a quick
 - `test`: This layer makes everything, including coffee;
 - `utils`: Here are custom functions to help our application;
 
-
 > This project has integration with LGTM automated code review
-
 
 Thanks ❤️

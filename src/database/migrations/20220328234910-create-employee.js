@@ -8,31 +8,19 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      name: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
+      name: Sequelize.STRING,
       email: {
         type: Sequelize.STRING,
         allowNull: false,
         unique: true,
       },
-      department: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
+      department: Sequelize.STRING,
       password: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      salary: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      birth_date: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
+      salary: Sequelize.STRING,
+      birth_date: Sequelize.STRING,
     });
   },
   down: async (queryInterface, Sequelize) => {

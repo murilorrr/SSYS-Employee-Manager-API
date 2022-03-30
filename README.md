@@ -12,8 +12,6 @@ src="https://img.shields.io/badge/License-MIT-yellow.svg" /></a>
   <a href="https://github.com/murilorsv14/SSYS-Employee-Manager-API/issues"><img src="https://camo.githubusercontent.com/b9825004b96d28bb7ed515dc3d7c3a3aa3800b3211ef8a7f32820c0019a24e29/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f6973737565732f74657277616e6572696b2f5363726f6c6c547269676765722e737667" alt="Issues" data-canonical-src="https://img.shields.io/github/issues/murilorsv14/SSYS-Employee-Manager-API.svg" style="max-width: 100%;"></a>
 </p>
 
-
-
 <p align="center">
   <a href="#zap-tech-stack">Tech Stack</a> •
   <a href="#handshake-contributing">Contributing</a> •
@@ -59,7 +57,7 @@ $ git clone git@github.com:murilorsv14/SSYS-Employee-Manager-API.git
 $ cd SSYS-Employee-Manager-API
 ```
 
-*Create an .env file that implements .env.example*
+_Create an .env file that implements .env.example_
 
 ### :whale:Docker Method
 
@@ -90,7 +88,6 @@ If everything is ok, you will be able to open at:
 http://localhost:8000
 ```
 
-
 ## 👣 Next steps
 
 - Improve unit tests
@@ -98,6 +95,7 @@ http://localhost:8000
 - Refactor to POO and TypeScript
 
 # coverage
+
 <p align="center">
     <img src="https://github.com/murilorsv14/SSYS-Employee-Manager-API/blob/main/coverage.png?raw=true" width="49.5%" heigth="50%" title="Coverage">
 </p>
