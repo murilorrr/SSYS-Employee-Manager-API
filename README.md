@@ -10,6 +10,7 @@
 <p align="center">
   <a href="#zap-tech-stack">Tech Stack</a> •
   <a href="#handshake-contributing">Contributing</a> •
+  <a href="#-getting-started">Getting Started</a> •
   <a href="https://github.com/murilorsv14">About Me</a>
 </p>
 
