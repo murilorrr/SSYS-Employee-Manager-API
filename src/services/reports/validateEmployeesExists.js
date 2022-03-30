@@ -1,6 +1,6 @@
 const { StatusCodes } = require('http-status-codes');
-const { customError } = require('../../../utils');
-const employeesWithOutPass = require('../../../utils/findEmployeesWithOutPass');
+const { customError } = require('../../utils');
+const employeesWithOutPass = require('../../utils/findEmployeesWithOutPass');
 
 module.exports = async () => {
   const employees = await employeesWithOutPass();

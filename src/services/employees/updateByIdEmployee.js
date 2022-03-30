@@ -1,5 +1,5 @@
 const { Employee } = require('../../database/models');
-const { customError } = require('../../../utils');
+const { customError } = require('../../utils');
 
 module.exports = async (id, employeePatch) => {
   const employee = await Employee.findOne({

@@ -1,6 +1,6 @@
 const Joi = require('joi');
 const { StatusCodes } = require('http-status-codes');
-const { customError, encryptPassword } = require('../../../utils');
+const { customError, encryptPassword } = require('../../utils');
 const { Employee } = require('../../database/models');
 
 const employeeSchema = Joi.object({

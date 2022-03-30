@@ -1,4 +1,4 @@
-const employeeWithoutPassword = require('../../../utils/findEmployeesWithOutPass');
+const employeeWithoutPassword = require('../../utils/findEmployeesWithOutPass');
 
 module.exports = async () => {
   const employees = await employeeWithoutPassword();

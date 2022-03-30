@@ -1,5 +1,5 @@
 const { StatusCodes } = require('http-status-codes');
-const { customError } = require('../../../utils');
+const { customError } = require('../../utils');
 const { Employee } = require('../../database/models');
 
 const validateEmployeeExist = async (id) => {

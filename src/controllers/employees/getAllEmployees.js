@@ -1,4 +1,4 @@
-const defaultResponseOK = require('../../../utils/defaultResponseOk');
+const defaultResponseOK = require('../../utils/defaultResponseOk');
 const { getAll } = require('../../services/employees');
 
 module.exports = async (req, res, next) => {

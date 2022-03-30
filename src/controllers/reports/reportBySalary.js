@@ -1,5 +1,5 @@
 const { reportBySalary } = require('../../services/reports');
-const defaultResponseOK = require('../../../utils/defaultResponseOk');
+const defaultResponseOK = require('../../utils/defaultResponseOk');
 
 module.exports = async (req, res, next) => {
   try {

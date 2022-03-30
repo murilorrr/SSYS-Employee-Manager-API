@@ -1,4 +1,4 @@
-const defaultResponseOK = require('../../../utils/defaultResponseOk');
+const defaultResponseOK = require('../../utils/defaultResponseOk');
 const { updateById } = require('../../services/employees');
 
 const updateOneEmployee = async (req, res, next) => {

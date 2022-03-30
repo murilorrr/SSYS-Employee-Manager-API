@@ -2,8 +2,8 @@ const { StatusCodes } = require('http-status-codes');
 const bcrypt = require('bcrypt');
 const Joi = require('joi');
 const { Employee } = require('../../database/models');
-const { generateJWT } = require('../../../utils');
-const { customError } = require('../../../utils');
+const { generateJWT } = require('../../utils');
+const { customError } = require('../../utils');
 
 const loginSchema = Joi.object({
   email: Joi.string()
