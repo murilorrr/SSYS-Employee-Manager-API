@@ -1,9 +1,9 @@
 const { StatusCodes } = require('http-status-codes');
 const { customError } = require('../../utils');
-const employeesWithOutPass = require('../../utils/findEmployeesWithOutPass');
+const { employeeWithoutPassword } = require('../../utils');
 
 module.exports = async () => {
-  const employees = await employeesWithOutPass();
+  const employees = await employeeWithoutPassword();
   if (employees.length === 0) {
     throw customError(StatusCodes.NOT_FOUND, 'Employees not found');
   }

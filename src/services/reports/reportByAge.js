@@ -1,5 +1,5 @@
 const moment = require('moment');
-const { returnEmployeesIfExists } = require('./index');
+const returnEmployeesIfExists = require('./validateEmployeesExists');
 
 const buildReport = (employees) => {
   const report = {};

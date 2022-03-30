@@ -2,7 +2,7 @@ require('dotenv').config();
 
 const status = require('http-status-codes').StatusCodes;
 const JWT = require('jsonwebtoken');
-const { customError, decodeJWT } = require('../../utils');
+const { customError, decodeJWT } = require('../utils');
 
 const secret = process.env.SECRET;
 
