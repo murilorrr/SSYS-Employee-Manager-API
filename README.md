@@ -10,7 +10,7 @@
   </a>
   <a href="https://opensource.org/licenses/MIT"><img
 src="https://img.shields.io/badge/License-MIT-yellow.svg" /></a>
-  <a href="https://github.com/murilorsv14/SSYS-Employee-Manager-API/issues"><img src="https://camo.githubusercontent.com/b9825004b96d28bb7ed515dc3d7c3a3aa3800b3211ef8a7f32820c0019a24e29/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f6973737565732f74657277616e6572696b2f5363726f6c6c547269676765722e737667" alt="Issues" data-canonical-src="https://img.shields.io/github/issues/murilorsv14/SSYS-Employee-Manager-API.svg" style="max-width: 100%;"></a>
+  <img alt="GitHub issues" src="https://img.shields.io/github/issues/murilorsv14/SSYS-Employee-Manager-API">
 </p>
 
 <p align="center">
