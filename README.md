@@ -96,6 +96,7 @@ http://localhost:8000
 - Improve unit tests
 - Deploy server
 - Refactor to POO and TypeScript
+- Document API
 
 # coverage
 
